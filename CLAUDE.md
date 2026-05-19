@@ -43,12 +43,53 @@ SAMURAI SPRINT用のタスクボードアプリケーション。
 - `--no-verify` や `--force` は原則使用禁止。必要な場合はユーザーに確認を取る。
 - `main` へのforce pushは絶対に行わない。
 
-## ファイル構成（決定次第更新）
+## デプロイ先
+
+| 種別 | URL |
+|------|-----|
+| GitHub リポジトリ | https://github.com/kirohi-boy/task-board |
+| GitHub Pages (本番) | https://kirohi-boy.github.io/task-board/ |
+
+`main` ブランチへのプッシュで GitHub Actions が自動ビルド・デプロイする。
+
+## 技術スタック
+
+| 役割 | 技術 |
+|------|------|
+| UI ライブラリ | React 18 |
+| ビルドツール | Vite 5 |
+| 言語 | JavaScript (JSX) |
+| スタイリング | CSS Modules なし / グローバル CSS |
+| 状態管理 | React useState（外部ライブラリなし） |
+| 永続化 | localStorage |
+| デプロイ | GitHub Actions + GitHub Pages |
+
+## コンポーネント命名規約
+
+- ファイル名・コンポーネント名はともに **PascalCase**（例: `App.jsx`、`TaskItem.jsx`）
+- 1ファイル1コンポーネントを原則とする
+- CSSファイルはコンポーネントと同名にする（例: `App.jsx` → `App.css`）
+- イベントハンドラは `handle` プレフィックス（例: `handleKeyDown`、`handleSubmit`）
+- state の setter は `set` プレフィックス（例: `setTasks`、`setInput`）
+
+## ファイル構成
 
 ```
 task-board/
-├── CLAUDE.md       # このファイル
-└── ...
+├── CLAUDE.md
+├── index.html
+├── package.json
+├── package-lock.json
+├── vite.config.js
+├── .gitignore
+├── .github/
+│   └── workflows/
+│       └── deploy.yml      # GitHub Pages 自動デプロイ
+└── src/
+    ├── main.jsx            # エントリーポイント
+    ├── index.css           # グローバルスタイル
+    ├── App.jsx             # タスクボード本体
+    └── App.css             # App コンポーネントのスタイル
 ```
 
 ## その他のルール
